@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Search from "./pages/Search";
 import Saved from "./pages/Saved";
+import Jumbotron from "./components/Jumbotron";
 
 function App() {
   return (

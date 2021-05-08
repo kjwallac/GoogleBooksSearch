@@ -4,6 +4,6 @@ const googleRoutes = require("./google");
 
 
 // Post routes
-router.use("/", routes);
+router.use("/google", googleRoutes);
 
 module.exports = router;

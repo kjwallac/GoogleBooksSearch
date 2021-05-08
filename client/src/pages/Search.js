@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 import Jumbotron from "../components/Jumbotron";
 import SearchBox from "../components/SearchBox";
+import BookCard from "../components/BookCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,18 +26,26 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  results: {
+    padding: 10,
+  },
 }));
 
 export default function Search() {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [books, setBooks] = React.useState([]);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  function onSearch(criteria) {
+  async function onSearch(criteria) {
     console.log(criteria);
+    const searchResponse = await fetch(`/api/google/${criteria}`);
+    const foundBooks = await searchResponse.json();
+    console.log(foundBooks);
+    setBooks(foundBooks);
   }
 
   return (
@@ -45,8 +54,14 @@ export default function Search() {
         title="Search Google Books"
         subtitle="Search for Books of Interest"
       />
-      ;
-      <SearchBox searchHandler={onSearch}/>
+      
+      <SearchBox searchHandler={onSearch} />
+      
+      <div className="results">
+        {books.map((b) => (
+          <BookCard book={b} />
+        ))}
+      </div>
     </>
   );
 }

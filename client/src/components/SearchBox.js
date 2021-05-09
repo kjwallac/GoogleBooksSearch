@@ -96,7 +96,7 @@ export default function SearchBox({ searchHandler }) {
           </div>
         </CardContent>
         <CardActions className={classes.searchButton}>
-          <Button variant="outlined" color="primary" onClick={() => searchHandler(search)}>
+          <Button disabled={!search} variant="outlined" color="primary" onClick={() => searchHandler(search)}>
             Search
           </Button>
         </CardActions>

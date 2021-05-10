@@ -1,20 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 import Bar from "./components/Bar";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 import Search from "./pages/Search";
 import Saved from "./pages/Saved";
-import Jumbotron from "./components/Jumbotron";
+import Notifier from "./components/Notifier";
 
 function App() {
   return (
     <Router>
       <Bar />
+      <Notifier />
       <Switch>
         <Route path="/search">
           <Search />

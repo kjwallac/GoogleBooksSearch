@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const socketio = require("socket.io");
+const notifier = require("./notifier");
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -24,6 +26,8 @@ mongoose.connect(
   }
 );
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
+const notifierSocket = socketio(server);
+notifier.setNotifierSocket(notifierSocket);

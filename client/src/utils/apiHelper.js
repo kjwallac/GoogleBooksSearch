@@ -1,3 +1,8 @@
+import { io } from "socket.io-client";
+
+const socket = io();
+socket.on("notifications", notifyUser);
+
 let _notifier = null;
 export function setNotifier(notifier) {
   _notifier = notifier;
@@ -17,7 +22,7 @@ export async function executeApiRequest(uri, method, payload) {
       method,
       body: payload ? JSON.stringify(payload) : undefined,
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
     });
     if (!response.ok) {

@@ -1,4 +1,6 @@
 const db = require("../models");
+const notifier = require("../notifier");
+
 async function executeDbOp(operation, res) {
   try {
     const returnValue = await operation();
@@ -24,6 +26,7 @@ module.exports = {
   },
   async create(req, res) {
     await executeDbOp(async () => await db.Book.create(req.body), res);
+    notifier.sendNotification(`${req.body.title} has been added to the library.`);
   },
   async remove(req, res) {
     await executeDbOp(async () => {
